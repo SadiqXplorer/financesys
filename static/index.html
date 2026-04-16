@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Management System</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <nav class="top-nav">
+            <a href="index.html">Dashboard</a>
+            <a href="reports.html">Reports</a>
+            <a href="admin.html">Admin</a>
+            <a href="login.html">Login</a>
+        </nav>
+        <header class="hero">
+            <div class="hero-copy">
+                <p class="eyebrow">DBMS Project</p>
+                <h1>Finance Management System</h1>
+                <p class="hero-text">
+                    Track accounts, incomes, expenses, and budgets from one dashboard backed by SQLite.
+                </p>
+                <div class="hero-actions">
+                    <a class="hero-link" href="reports.html">View Reports</a>
+                    <button type="button" id="reset-demo-button" class="secondary-button">Reset Demo Data</button>
+                </div>
+            </div>
+            <div class="hero-stack">
+                <div class="hero-card">
+                    <p>Active Month</p>
+                    <h2 id="active-month">-</h2>
+                    <span>Personal finance snapshot with full database support</span>
+                </div>
+                <div class="profile-card">
+                    <div class="profile-badge">SA</div>
+                    <div>
+                        <p class="profile-label">Project User</p>
+                        <h3>SADIQ</h3>
+                        <span>Use this system to enter your own salary, expenses, and investments</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="audience-strip">
+            <div class="audience-card">
+                <p>Track</p>
+                <strong>Salary</strong>
+                <span>Add your own salary or freelance income whenever you receive it.</span>
+            </div>
+            <div class="audience-card">
+                <p>Track</p>
+                <strong>Expenses</strong>
+                <span>Record food, bills, travel, shopping, and other personal spending.</span>
+            </div>
+            <div class="audience-card">
+                <p>Track</p>
+                <strong>Investments</strong>
+                <span>Store stock, mutual fund, and savings deposits separately from expenses.</span>
+            </div>
+        </section>
+
+        <main>
+            <section class="summary-grid">
+                <article class="summary-card">
+                    <p>Total Balance</p>
+                    <h3 id="total-balance">Rs. 0</h3>
+                </article>
+                <article class="summary-card">
+                    <p>Monthly Income</p>
+                    <h3 id="monthly-income">Rs. 0</h3>
+                </article>
+                <article class="summary-card">
+                    <p>Monthly Expense</p>
+                    <h3 id="monthly-expense">Rs. 0</h3>
+                </article>
+                <article class="summary-card">
+                    <p>Monthly Investment</p>
+                    <h3 id="monthly-investment">Rs. 0</h3>
+                </article>
+                <article class="summary-card">
+                    <p>Net Savings</p>
+                    <h3 id="net-savings">Rs. 0</h3>
+                </article>
+            </section>
+
+            <section class="content-grid">
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Add Transaction</h2>
+                        <span>Enter your salary, expenses, or investments</span>
+                    </div>
+                    <form id="transaction-form" class="form-grid">
+                        <label>
+                            Type
+                            <select name="type" id="transaction-type" required>
+                                <option value="income">Income</option>
+                                <option value="expense">Expense</option>
+                                <option value="investment">Investment</option>
+                            </select>
+                        </label>
+                        <label>
+                            Account
+                            <select name="account_id" id="transaction-account" required></select>
+                        </label>
+                        <label>
+                            Category
+                            <select name="category_id" id="transaction-category" required></select>
+                        </label>
+                        <label>
+                            Amount
+                            <input type="text" name="amount" inputmode="decimal" placeholder="Enter amount" required>
+                        </label>
+                        <label>
+                            Date
+                            <input type="date" name="transaction_date" id="transaction-date" required>
+                        </label>
+                        <label class="full-width">
+                            Note
+                            <input type="text" name="note" placeholder="Optional note">
+                        </label>
+                        <button type="submit">Save Transaction</button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Create Budget</h2>
+                        <span>Monthly expense planning</span>
+                    </div>
+                    <form id="budget-form" class="form-grid">
+                        <label>
+                            Expense Category
+                            <select name="category_id" id="budget-category" required></select>
+                        </label>
+                        <label>
+                            Month
+                            <input type="month" name="month" id="budget-month" required>
+                        </label>
+                        <label>
+                            Budget Amount
+                            <input type="text" name="amount_limit" inputmode="decimal" placeholder="Enter budget amount" required>
+                        </label>
+                        <button type="submit">Save Budget</button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Add Account</h2>
+                        <span>Cash, bank, wallet and more</span>
+                    </div>
+                    <form id="account-form" class="form-grid compact">
+                        <label>
+                            Account Name
+                            <input type="text" name="name" required>
+                        </label>
+                        <label>
+                            Type
+                            <input type="text" name="type" placeholder="Bank / Cash / UPI" required>
+                        </label>
+                        <label>
+                            Opening Balance
+                            <input type="text" name="balance" inputmode="decimal" placeholder="Enter opening balance" required>
+                        </label>
+                        <button type="submit">Add Account</button>
+                    </form>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Add Category</h2>
+                        <span>Custom income and expense groups</span>
+                    </div>
+                    <form id="category-form" class="form-grid compact">
+                        <label>
+                            Category Name
+                            <input type="text" name="name" required>
+                        </label>
+                        <label>
+                            Type
+                            <select name="type" required>
+                                <option value="income">Income</option>
+                                <option value="expense">Expense</option>
+                                <option value="investment">Investment</option>
+                            </select>
+                        </label>
+                        <button type="submit">Add Category</button>
+                    </form>
+                </div>
+            </section>
+
+            <section class="content-grid lower-grid">
+                <div class="panel wide-panel">
+                    <div class="panel-head">
+                        <h2>Recent Transactions</h2>
+                        <span>Latest money movements</span>
+                    </div>
+                    <div class="table-wrap">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Date</th>
+                                    <th>Type</th>
+                                    <th>Category</th>
+                                    <th>Account</th>
+                                    <th>Amount</th>
+                                    <th>Note</th>
+                                </tr>
+                            </thead>
+                            <tbody id="transaction-table-body"></tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Budget Progress</h2>
+                        <span>Compare spending against limits</span>
+                    </div>
+                    <div id="budget-progress-list" class="stack-list"></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Expense Breakdown</h2>
+                        <span>Monthly category insights</span>
+                    </div>
+                    <div id="expense-breakdown" class="stack-list"></div>
+                </div>
+
+                <div class="panel">
+                    <div class="panel-head">
+                        <h2>Accounts</h2>
+                        <span>Available balance by source</span>
+                    </div>
+                    <div id="accounts-list" class="stack-list"></div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="app.js"></script>
+</body>
+</html>

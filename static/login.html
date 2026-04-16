@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance System Login</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <nav class="top-nav">
+            <a href="index.html">Dashboard</a>
+            <a href="reports.html">Reports</a>
+            <a href="admin.html">Admin</a>
+            <a href="login.html" class="active">Login</a>
+        </nav>
+
+        <section class="hero single-column">
+            <div class="hero-copy">
+                <p class="eyebrow">User Access</p>
+                <h1>Finance Portal Login</h1>
+                <p class="hero-text">A clean entry screen for your DBMS project demo.</p>
+            </div>
+        </section>
+
+        <section class="content-grid single-panel">
+            <div class="panel auth-panel">
+                <div class="panel-head">
+                    <h2>Sign In</h2>
+                    <span>Demo credentials screen</span>
+                </div>
+                <form class="form-grid compact" id="login-form">
+                    <label>
+                        Email
+                        <input type="email" name="email" placeholder="student@example.com" required>
+                    </label>
+                    <label>
+                        Password
+                        <input type="password" name="password" placeholder="Enter password" required>
+                    </label>
+                    <button type="submit">Login</button>
+                </form>
+                <div class="info-card">
+                    <strong>Demo Note</strong>
+                    <p>This page is connected to the shared frontend styling and behavior. On submit it redirects to the dashboard for presentation use.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="app.js"></script>
+</body>
+</html>

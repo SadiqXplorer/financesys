@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Finance Admin Panel</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="page-shell">
+        <nav class="top-nav">
+            <a href="index.html">Dashboard</a>
+            <a href="reports.html">Reports</a>
+            <a href="admin.html" class="active">Admin</a>
+            <a href="login.html">Login</a>
+        </nav>
+
+        <header class="hero single-column">
+            <div class="hero-copy">
+                <p class="eyebrow">Administration</p>
+                <h1>Manage Core Finance Data</h1>
+                <p class="hero-text">Use this screen to maintain accounts, categories, and budgets in one place.</p>
+            </div>
+        </header>
+
+        <section class="content-grid">
+            <div class="panel">
+                <div class="panel-head">
+                    <h2>Add Account</h2>
+                    <span>Create a new money source</span>
+                </div>
+                <form id="account-form" class="form-grid compact">
+                    <label>
+                        Account Name
+                        <input type="text" name="name" required>
+                    </label>
+                    <label>
+                        Type
+                        <input type="text" name="type" placeholder="Bank / Cash / UPI" required>
+                    </label>
+                    <label>
+                        Opening Balance
+                        <input type="text" name="balance" inputmode="decimal" placeholder="Enter opening balance" required>
+                    </label>
+                    <button type="submit">Add Account</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <h2>Add Category</h2>
+                    <span>Create income, expense, or investment groups</span>
+                </div>
+                <form id="category-form" class="form-grid compact">
+                    <label>
+                        Category Name
+                        <input type="text" name="name" required>
+                    </label>
+                    <label>
+                        Type
+                        <select name="type" required>
+                            <option value="income">Income</option>
+                            <option value="expense">Expense</option>
+                            <option value="investment">Investment</option>
+                        </select>
+                    </label>
+                    <button type="submit">Add Category</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <h2>Create Budget</h2>
+                    <span>Assign monthly limit</span>
+                </div>
+                <form id="budget-form" class="form-grid compact">
+                    <label>
+                        Expense Category
+                        <select name="category_id" id="budget-category" required></select>
+                    </label>
+                    <label>
+                        Month
+                        <input type="month" name="month" id="budget-month" required>
+                    </label>
+                    <label>
+                        Budget Amount
+                        <input type="text" name="amount_limit" inputmode="decimal" placeholder="Enter budget amount" required>
+                    </label>
+                    <button type="submit">Save Budget</button>
+                </form>
+            </div>
+
+            <div class="panel">
+                <div class="panel-head">
+                    <h2>Accounts Overview</h2>
+                    <span>All active accounts</span>
+                </div>
+                <div id="accounts-list" class="stack-list"></div>
+            </div>
+        </section>
+    </div>
+
+    <div id="toast" class="toast hidden"></div>
+    <script src="app.js"></script>
+</body>
+</html>
