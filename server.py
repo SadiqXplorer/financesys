@@ -1,5 +1,7 @@
 import json
+import os
 import sqlite3
+import tempfile
 from datetime import datetime
 from http.server import BaseHTTPRequestHandler, HTTPServer
 from pathlib import Path
@@ -8,7 +10,11 @@ from urllib.parse import parse_qs, urlparse
 
 BASE_DIR = Path(__file__).resolve().parent
 STATIC_DIR = BASE_DIR / "static"
-DB_PATH = BASE_DIR / "finance_manager.db"
+DB_PATH = (
+    Path(tempfile.gettempdir()) / "finance_manager.db"
+    if os.getenv("VERCEL")
+    else BASE_DIR / "finance_manager.db"
+)
 
 
 def get_connection():

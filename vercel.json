@@ -1,0 +1,13 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "cleanUrls": false,
+  "rewrites": [
+    { "source": "/", "destination": "/static/index.html" },
+    { "source": "/reports.html", "destination": "/static/reports.html" },
+    { "source": "/admin.html", "destination": "/static/admin.html" },
+    { "source": "/login.html", "destination": "/static/login.html" },
+    { "source": "/styles.css", "destination": "/static/styles.css" },
+    { "source": "/app.js", "destination": "/static/app.js" },
+    { "source": "/api/(.*)", "destination": "/api/index.py" }
+  ]
+}
