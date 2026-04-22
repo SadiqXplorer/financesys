@@ -134,6 +134,9 @@ def json_response(handler, payload, status=200):
     body = json.dumps(payload).encode("utf-8")
     handler.send_response(status)
     handler.send_header("Content-Type", "application/json; charset=utf-8")
+    handler.send_header("Access-Control-Allow-Origin", "*")
+    handler.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+    handler.send_header("Access-Control-Allow-Headers", "Content-Type")
     handler.send_header("Content-Length", str(len(body)))
     handler.end_headers()
     handler.wfile.write(body)
@@ -144,7 +147,15 @@ def error_response(handler, message, status=400):
 
 
 class FinanceRequestHandler(BaseHTTPRequestHandler):
+    def do_OPTIONS(self):
+        self.send_response(204)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
+        self.send_header("Access-Control-Allow-Headers", "Content-Type")
+        self.end_headers()
+
     def do_GET(self):
+        init_db()
         parsed = urlparse(self.path)
         if parsed.path == "/api/dashboard":
             self.handle_dashboard()
@@ -164,6 +175,7 @@ class FinanceRequestHandler(BaseHTTPRequestHandler):
         self.serve_static(parsed.path)
 
     def do_POST(self):
+        init_db()
         parsed = urlparse(self.path)
         if parsed.path == "/api/reset":
             self.handle_reset()
@@ -208,6 +220,7 @@ class FinanceRequestHandler(BaseHTTPRequestHandler):
         data = file_path.read_bytes()
         self.send_response(200)
         self.send_header("Content-Type", content_types.get(file_path.suffix, "text/plain; charset=utf-8"))
+        self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Content-Length", str(len(data)))
         self.end_headers()
         self.wfile.write(data)
